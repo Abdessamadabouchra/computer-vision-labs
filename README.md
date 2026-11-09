@@ -7,10 +7,10 @@ Trois notebooks pédagogiques en français pour Abdessamad Abouchraa, INPT. Le p
 | Notebook | Modèle / bibliothèque | Expérience |
 |---|---|---|
 | [01_object_detection.ipynb](01_object_detection.ipynb) | YOLO11n / Ultralytics | Une photo de bus, boîtes/classes/confiances, effet du seuil |
-| [02_ocr.ipynb](02_ocr.ipynb) | Tesseract / pytesseract | Document contrôlé, transcription, CER/WER et flou ; option photo personnelle |
-| [03_visual_retrieval.ipynb](03_visual_retrieval.ipynb) | CLIP ViT-B/32 / Transformers | Trois photos réelles, texte-image et image-image, cosinus et top-k |
+| [02_ocr.ipynb](02_ocr.ipynb) | Tesseract / pytesseract | Image de document téléchargée, transcription, boîtes des mots, CSV et PDF recherchable |
+| [03_visual_retrieval.ipynb](03_visual_retrieval.ipynb) | CLIP ViT-B/32 / Transformers | Cinq photos réelles, requête texte, photo requête externe, top-k, index et exports |
 
-Chaque notebook contient définition, installation, données, fonctionnement, visualisation, limites, quatre questions et bibliographie. Aucun média n’est créé par un générateur d’images. Le document OCR par défaut est un test typographique, clairement identifié.
+Chaque notebook contient définition, installation, données, fonctionnement, visualisation, limites, quatre questions et bibliographie. Aucun média n’est créé par un générateur d’images. Le document OCR est désormais une image existante téléchargée depuis les tests officiels pytesseract ; aucune entrée n’est fabriquée avec une police.
 
 ## Démarrage local
 
@@ -39,7 +39,7 @@ Code des trois expériences préparé et contrôlé syntaxiquement. Les cellules
 
 - Détection : visualisation et seuils uniquement. La mAP nécessite des annotations, donc elle n’est pas calculée sur cette photo non annotée.
 - OCR : CER et WER via distance de Levenshtein. Sans transcription de référence sur une image personnelle, les métriques sont désactivées.
-- Retrieval : trois requêtes à une seule cible chacune. Hit@k et mAP illustrent le calcul, sans constituer un benchmark. Le cosinus ne représente pas une probabilité.
+- Retrieval : cinq requêtes à une seule cible chacune. Hit@k et mAP illustrent le calcul, sans constituer un benchmark. Le cosinus ne représente pas une probabilité.
 - Les temps dépendent du matériel et excluent le téléchargement des poids. Aucune comparaison universelle de performances.
 
 Les téléchargements vont dans `data/`, les résultats dans `outputs/`. Ils sont ignorés par Git. Pour aller plus loin : photos variées, annotations, plusieurs requêtes et séparation des données d’évaluation.
@@ -52,3 +52,9 @@ Les téléchargements vont dans `data/`, les résultats dans `outputs/`. Ils son
 - Photos : démonstrations publiques Ultralytics (bus, Zidane) et PyTorch Hub (chien), URLs dans les cellules. Images téléchargées à l’exécution, non redistribuées ici. Leurs droits restent ceux des sources.
 
 Les bibliothèques, modèles et poids conservent leurs propres licences. Ultralytics propose notamment AGPL-3.0 et une licence commerciale selon l’usage. Consulter les conditions de chaque dépendance avant réutilisation.
+
+## Exemples réels : mise à jour
+
+OCR : image existante `tests/data/test.png` de pytesseract, affichage avant traitement, original vs prétraité, localisation des mots et exports texte/CSV/PNG/PDF recherchable. Pour CER/WER, saisir une transcription humaine ; aucune vérité terrain n’est inventée. Une photo locale peut remplacer la source.
+
+Retrieval : cinq photographies Internet (chien, bus, football, perroquets, chats), index CLIP normalisé, requête libre, classement réel à l’exécution, nouvelle photographie BLIP absente de la base pour image-image, exports et cinq requêtes d’évaluation. Les résultats ne sont pas préremplis.
